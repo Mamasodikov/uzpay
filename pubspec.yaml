@@ -19,7 +19,7 @@ dependencies:
   fluttertoast: ^8.2.5
 
 screenshots:
-  - description: 'Banner'
+  - description: 'Banner for showcasing'
     path: example/screenshots/uzpay_banner.png
   - description: 'Example of payment systems'
     path: example/screenshots/default.png
