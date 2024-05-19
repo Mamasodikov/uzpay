@@ -48,13 +48,13 @@ class _WebViewPageState extends State<WebViewPage> {
 
     if (PaymentSystem.Click == widget.paymentSystem) {
       urlRequest = URLRequest(
-          url: Uri.https(clickPaymentPath, "/services/pay", {
+          url: WebUri.uri(Uri.https(clickPaymentPath, "/services/pay", {
         'service_id': widget.paymentParams.clickParams?.serviceId,
         'merchant_id': widget.paymentParams.clickParams?.merchantId,
         'amount': widget.amount.toString(),
         'transaction_param': widget.paymentParams.clickParams?.transactionParam,
         'merchant_user_id': widget.paymentParams.clickParams?.merchantUserId
-      }));
+      })));
     } else if (PaymentSystem.Payme == widget.paymentSystem ||
         PaymentSystem.PaymeTest == widget.paymentSystem) {
       String text =
@@ -63,11 +63,11 @@ class _WebViewPageState extends State<WebViewPage> {
       String encoded = stringToBase64.encode(text);
 
       urlRequest = URLRequest(
-          url: Uri.https(
+          url: WebUri.uri(Uri.https(
               PaymentSystem.PaymeTest == widget.paymentSystem
                   ? paymePaymentTestPath
                   : paymePaymentPath,
-              encoded));
+              encoded)));
     }
 
     pullToRefreshController = kIsWeb

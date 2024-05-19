@@ -13,8 +13,8 @@
 - Tashqi brauzerga shaxsiy menyu bo'limini qo'shish
 
 - Hozirda mavjud to'lov tizimlari:
-  - **Click** - (*CLICK BUTTON* - orqali) - [DOCS](https://docs.click.uz/en/click-button/)
-  - **Payme** - (*GET so'rovida chek yuborish orqali*) - [DOCS](https://developer.help.paycom.uz/initsializatsiya-platezhey/otpravka-cheka-po-metodu-get/)
+  - **Click** - (*CLICK BUTTON - orqali*) - [DOCS](https://docs.click.uz/en/click-button/)
+  - **Payme** - (*GET - so'rovida chek yuborish orqali*) - [DOCS](https://developer.help.paycom.uz/initsializatsiya-platezhey/otpravka-cheka-po-metodu-get/)
 
 - Qo'shilishi re'jada turganlari:
   - **Uzcard**

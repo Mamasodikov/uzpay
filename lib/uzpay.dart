@@ -48,16 +48,16 @@ class UzPay {
           await InAppWebViewController.setWebContentsDebuggingEnabled(false);
         }
 
-        Uri urlRequest = Uri();
+        WebUri? urlRequest;
 
         if (PaymentSystem.Click == paymentSystem) {
-          urlRequest = Uri.https(clickPaymentPath, "/services/pay", {
+          urlRequest = WebUri.uri(Uri.https(clickPaymentPath, "/services/pay", {
             'service_id': paymentParams.clickParams?.serviceId,
             'merchant_id': paymentParams.clickParams?.merchantId,
             'amount': amount.toString(),
             'transaction_param': paymentParams.clickParams?.transactionParam,
             'merchant_user_id': paymentParams.clickParams?.merchantUserId
-          });
+          }));
         } else if (PaymentSystem.Payme == paymentSystem ||
             PaymentSystem.PaymeTest == paymentSystem) {
           String text =
@@ -67,9 +67,9 @@ class UzPay {
           Codec<String, String> stringToBase64 = utf8.fuse(base64);
           String encoded = stringToBase64.encode(text);
 
-          urlRequest = Uri.https(PaymentSystem.PaymeTest == paymentSystem
+          urlRequest = WebUri.uri(Uri.https(PaymentSystem.PaymeTest == paymentSystem
               ? paymePaymentTestPath
-              : paymePaymentPath, encoded);
+              : paymePaymentPath, encoded));
         }
 
         ///Other payments are coming soon...

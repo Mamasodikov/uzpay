@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
 
   # For web view
-  flutter_inappwebview: 6.0.0-beta.9
+  flutter_inappwebview: ^6.0.0
   # Opening URL/DIAL/MAILS/FILES
   url_launcher: ^6.1.5
   # For simple toasts
