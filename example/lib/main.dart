@@ -157,7 +157,7 @@ class _MyAppState extends State<MyApp> {
                 Expanded(
                   flex: 1,
                   child: InkWell(
-                    onTap: () => CustomToast.showToast('Soon....'),
+                    onTap: () => CustomToast.showToast('Tez orada....'),
                     child: Card(
                       elevation: 1,
                       color: Colors.white,
@@ -182,7 +182,7 @@ class _MyAppState extends State<MyApp> {
                 Expanded(
                   flex: 1,
                   child: InkWell(
-                    onTap: () => CustomToast.showToast('Soon....'),
+                    onTap: () => CustomToast.showToast('Tez orada....'),
                     child: Card(
                       elevation: 1,
                       color: Colors.white,
@@ -211,7 +211,7 @@ class _MyAppState extends State<MyApp> {
                 Expanded(
                   flex: 1,
                   child: InkWell(
-                    onTap: () => CustomToast.showToast('Soon....'),
+                    onTap: () => CustomToast.showToast('Tez orada....'),
                     child: Card(
                       elevation: 1,
                       color: Colors.white,
@@ -236,7 +236,7 @@ class _MyAppState extends State<MyApp> {
                 Expanded(
                   flex: 1,
                   child: InkWell(
-                    onTap: () => CustomToast.showToast('Soon....'),
+                    onTap: () => CustomToast.showToast('Tez orada....'),
                     child: Card(
                       elevation: 1,
                       color: Colors.white,
@@ -334,8 +334,8 @@ class _MyAppState extends State<MyApp> {
                                                       label:
                                                           'Application support',
                                                       action: (url, title) {
-                                                        launchCustomUrl(
-                                                            'https://t.me/flutterblogs');
+                                                         launchCustomUrl(
+                                                            'https://t.me/your_support_bot');
                                                       }));
                                         },
                                         child: DottedBorderWidget(
@@ -454,7 +454,7 @@ class _MyAppState extends State<MyApp> {
                     )),
               ));
     } else {
-      CustomToast.showToast("To'lov imkonsiz, minimal 500 so'mdan yuqori!");
+      CustomToast.showToast("To'lov imkonsiz, minimal summa 500 so'mdan yuqori!");
     }
   }
 }
