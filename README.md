@@ -4,9 +4,10 @@
 
 ## Taqdimot
 
-![banner](https://github.com/Mamasodikov/uzpay/blob/b4cb426df9514b9ea085e204775b76f587ed52de/example/screenshots/uzpay_banner.png)
+![uzpay_banner](https://github.com/Mamasodikov/uzpay/assets/64262986/cf837558-f3cf-4ddf-bd1c-7735db57617f)
 
 ## Xususiyatlari
+
 
 - To'lovlarni ichki va tashqi brauzer orqali ochish
 - Ichki brauzer "header" qismidagi yozuv va rangni sizning ilovangizga moslashtirish
