@@ -92,6 +92,13 @@ var paymentParams = Params(
             launchCustomUrl('https://flutterdev.uz/men-haqimda/'); }));
    ```  
 
+### Enumlar:
+
+```dart
+enum PaymentSystem { Click, Payme, PaymeTest }
+enum BrowserType { External, Internal }
+```
+
 ***Eslatma: Agar to'lov summasi Payme kabi tiyinlar bilan kiritilsa, jarayon hisobga olingan, faqat aktual summani kiritasiz, masalan 5000 so'm => amount: 5000***
 
 ***Savol va takliflar bo'lsa, tortinmang: https://allmylinks.com/mamasodikov***
