@@ -8,7 +8,6 @@
 
 ## Xususiyatlari
 
-
 - To'lovlarni ichki va tashqi brauzer orqali ochish
 - Ichki brauzer "header" qismidagi yozuv va rangni sizning ilovangizga moslashtirish
 - Tashqi brauzerga shaxsiy menyu bo'limini qo'shish
