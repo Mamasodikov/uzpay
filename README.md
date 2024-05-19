@@ -4,6 +4,7 @@
 
 ## Taqdimot
 
+![banner](https://github.com/Mamasodikov/uzpay/blob/b4cb426df9514b9ea085e204775b76f587ed52de/example/screenshots/uzpay_banner.png)
 
 ## Xususiyatlari
 
