@@ -75,11 +75,11 @@ var paymentParams = Params(
         // Quyidagilar ixtiyoriy parametrlar
         headerColor: Colors.blue, // Header rangi
         headerTitle: "Click tizimi orqali to'lash"), // Header yozuvi
-        ));
+        );
         
 /// Tashqi brauzer orqali to'lov chekini ochish
     UzPay.doPayment(context,
-        amount: 5000, // To'ov summasi
+        amount: 5000, // To'lov summasi
         paymentSystem: PaymentSystem.Payme,
         paymentParams: paymentParams,
         browserType: BrowserType.External,

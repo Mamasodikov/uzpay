@@ -12,6 +12,8 @@ import 'package:uzpay/objects.dart';
 
 import 'web_view.dart';
 
+///TODO: Write export imports & specify platforms
+
 /// Main class
 class UzPay {
   static doPayment(BuildContext context,
