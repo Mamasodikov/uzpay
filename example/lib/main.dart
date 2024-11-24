@@ -27,10 +27,12 @@ class _MyAppState extends State<MyApp> {
   TextEditingController _controler = TextEditingController();
 
   ///Don't worry, this package doesn't post your *secrets* to third parties, you can analyse codes :)
-  String CLICK_SERVICE_ID = '3XXXX';
-  String CLICK_MERCHANT_ID = '2XXXX';
-  String CLICK_MERCHANT_USER_ID = '1XXXX';
+  String CLICK_SERVICE_ID = '38944';
+  String CLICK_MERCHANT_ID = '31069';
+  String CLICK_MERCHANT_USER_ID = '48614';
+
   String PAYME_MERCHANT_ID = 'REPLACE_WITH_YOURS';
+
   String TRANS_ID = 'REPLACE_WITH_YOURS';
 
   @override
@@ -277,184 +279,287 @@ class _MyAppState extends State<MyApp> {
                 child: Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 20, horizontal: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  ZoomTapAnimation(
-                                    child: Theme(
-                                      data: ThemeData(
-                                        splashColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        scaffoldBackgroundColor:
-                                            Theme.of(context).cardTheme.color,
-                                      ),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          Navigator.pop(context);
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    ZoomTapAnimation(
+                                      child: Theme(
+                                        data: ThemeData(
+                                          splashColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          scaffoldBackgroundColor:
+                                              Theme.of(context).cardTheme.color,
+                                        ),
+                                        child: InkWell(
+                                          onTap: () async {
+                                            Navigator.pop(context);
 
-                                          var paymentParams = Params(
-                                              paymeParams: PaymeParams(
-                                                  transactionParam: TRANS_ID,
-                                                  merchantId: PAYME_MERCHANT_ID,
+                                            var paymentParams = Params(
+                                                paymeParams: PaymeParams(
+                                                    transactionParam: TRANS_ID,
+                                                    merchantId:
+                                                        PAYME_MERCHANT_ID,
 
-                                                  //This fields are optional
-                                                  accountObject: 'userId',
-                                                  // If changed
-                                                  headerColor: Colors.indigo,
-                                                  headerTitle:
-                                                      "Payme tizimi orqali to'lash"),
-                                              clickParams: ClickParams(
-                                                  transactionParam: TRANS_ID,
-                                                  merchantId: CLICK_MERCHANT_ID,
-                                                  serviceId: CLICK_SERVICE_ID,
-                                                  merchantUserId:
-                                                      CLICK_MERCHANT_USER_ID));
+                                                    //This fields are optional
+                                                    accountObject: 'userId',
+                                                    // If changed
+                                                    headerColor: Colors.indigo,
+                                                    headerTitle:
+                                                        "Payme tizimi orqali to'lash"),
+                                                clickParams: ClickParams(
+                                                    transactionParam: TRANS_ID,
+                                                    merchantId:
+                                                        CLICK_MERCHANT_ID,
+                                                    serviceId: CLICK_SERVICE_ID,
+                                                    merchantUserId:
+                                                        CLICK_MERCHANT_USER_ID));
 
-                                          ///Doing payment with external browser
-                                          UzPay.doPayment(context,
-                                              amount: amount,
-                                              paymentSystem:
-                                                  PaymentSystem.Click,
-                                              paymentParams: paymentParams,
-                                              browserType: BrowserType.External,
+                                            ///Doing payment with external browser
+                                            UzPay.doPayment(context,
+                                                amount: amount,
+                                                paymentSystem: paymentSystem,
+                                                paymentParams: paymentParams,
+                                                browserType:
+                                                    BrowserType.External,
 
-                                              //This field is optional
-                                              externalBrowserMenuItem:
-                                                  ChromeSafariBrowserMenuItem(
-                                                      id: 1,
-                                                      label:
-                                                          'Application support',
-                                                      action: (url, title) {
-                                                         launchCustomUrl(
-                                                            'https://t.me/your_support_bot');
-                                                      }));
-                                        },
-                                        child: DottedBorderWidget(
-                                          child: Center(
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(8),
-                                              child: Column(
-                                                children: [
-                                                  Image.asset(
-                                                    'assets/browsers.png',
-                                                    height: 40,
-                                                    // color: cFirstColor,
-                                                  ),
-                                                  const SizedBox(
-                                                    height: 10,
-                                                  ),
-                                                  Container(
-                                                    width: 100,
-                                                    child: Text(
-                                                      'Tashqi brauzer',
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      maxLines: 3,
-                                                      style: TextStyle(
-                                                          fontSize: 18,
-                                                          fontFamily: 'Medium',
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .bodyMedium
-                                                                  ?.color),
+                                                //This field is optional
+                                                externalBrowserMenuItem:
+                                                    ChromeSafariBrowserMenuItem(
+                                                        id: 1,
+                                                        label:
+                                                            'Application support',
+                                                        action: (url, title) {
+                                                          launchCustomUrl(
+                                                              'https://t.me/your_support_bot');
+                                                        }));
+                                          },
+                                          child: DottedBorderWidget(
+                                            child: Center(
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8),
+                                                child: Column(
+                                                  children: [
+                                                    Image.asset(
+                                                      'assets/browsers.png',
+                                                      height: 40,
+                                                      // color: cFirstColor,
                                                     ),
-                                                  ),
-                                                ],
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Container(
+                                                      width: 100,
+                                                      child: Text(
+                                                        'Tashqi brauzer',
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                        maxLines: 3,
+                                                        style: TextStyle(
+                                                            fontSize: 18,
+                                                            fontFamily:
+                                                                'Medium',
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .bodyMedium
+                                                                ?.color),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ]),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Column(children: [
-                            const SizedBox(
-                              height: 10,
+                                  ]),
                             ),
-                            ZoomTapAnimation(
-                              child: Theme(
-                                data: ThemeData(
-                                  splashColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  scaffoldBackgroundColor:
-                                      Theme.of(context).cardTheme.color,
-                                ),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.pop(context);
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Column(mainAxisSize: MainAxisSize.min, children: [
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              ZoomTapAnimation(
+                                child: Theme(
+                                  data: ThemeData(
+                                    splashColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    scaffoldBackgroundColor:
+                                        Theme.of(context).cardTheme.color,
+                                  ),
+                                  child: InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
 
-                                    ///Doing payment with internal browser
-                                    UzPay.doPayment(context,
-                                        amount: amount,
-                                        paymentSystem: paymentSystem,
-                                        paymentParams: paymentParams,
-                                        browserType: BrowserType.Internal);
-                                  },
-                                  child: DottedBorderWidget(
-                                    child: Center(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8),
-                                        child: Column(
-                                          children: [
-                                            Image.asset(
-                                              'assets/browser.png',
-                                              height: 40,
-                                              // color: cFirstColor,
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            Container(
-                                              width: 100,
-                                              child: Text(
-                                                'Ichki brauzer',
-                                                textAlign: TextAlign.center,
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 3,
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontFamily: 'Medium',
-                                                    color: Theme.of(context)
-                                                        .textTheme
-                                                        .bodyMedium
-                                                        ?.color),
+                                      ///Doing payment with internal browser
+                                      UzPay.doPayment(context,
+                                          amount: amount,
+                                          paymentSystem: paymentSystem,
+                                          paymentParams: paymentParams,
+                                          browserType: BrowserType.Internal);
+                                    },
+                                    child: DottedBorderWidget(
+                                      child: Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8),
+                                          child: Column(
+                                            children: [
+                                              Image.asset(
+                                                'assets/browser.png',
+                                                height: 40,
+                                                // color: cFirstColor,
                                               ),
-                                            ),
-                                          ],
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Container(
+                                                width: 100,
+                                                child: Text(
+                                                  'Ichki brauzer',
+                                                  textAlign: TextAlign.center,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 3,
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontFamily: 'Medium',
+                                                      color: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyMedium
+                                                          ?.color),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ]),
-                        )
+                            ])
+                          ],
+                        ),
+                        SizedBox(
+                          height: 150,
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                ZoomTapAnimation(
+                                  child: Theme(
+                                    data: ThemeData(
+                                      splashColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      scaffoldBackgroundColor:
+                                          Theme.of(context).cardTheme.color,
+                                    ),
+                                    child: InkWell(
+                                      onTap: () async {
+                                        Navigator.pop(context);
+
+                                        var paymentParams = Params(
+                                            paymeParams: PaymeParams(
+                                                transactionParam: TRANS_ID,
+                                                merchantId: PAYME_MERCHANT_ID,
+
+                                                //This fields are optional
+                                                accountObject: 'userId',
+                                                // If changed
+                                                headerColor: Colors.indigo,
+                                                headerTitle:
+                                                    "Payme tizimi orqali to'lash"),
+                                            clickParams: ClickParams(
+                                                transactionParam: TRANS_ID,
+                                                merchantId: CLICK_MERCHANT_ID,
+                                                serviceId: CLICK_SERVICE_ID,
+                                                merchantUserId:
+                                                    CLICK_MERCHANT_USER_ID));
+
+                                        ///Doing payment with external browser
+                                        UzPay.doPayment(context,
+                                            amount: amount,
+                                            paymentSystem: paymentSystem,
+                                            paymentParams: paymentParams,
+                                            browserType: BrowserType.ExternalOrDeepLink,
+
+                                            //This field is optional
+                                            externalBrowserMenuItem:
+                                                ChromeSafariBrowserMenuItem(
+                                                    id: 1,
+                                                    label:
+                                                        'Application support',
+                                                    action: (url, title) {
+                                                      launchCustomUrl(
+                                                          'https://t.me/your_support_bot');
+                                                    }));
+                                      },
+                                      child: DottedBorderWidget(
+                                        child: Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(8),
+                                            child: Column(
+                                              children: [
+                                                Image.asset(
+                                                  'assets/deeplink.png',
+                                                  height: 40,
+                                                  // color: cFirstColor,
+                                                ),
+                                                const SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(
+                                                  "Ilovadan (Agar o'rnatilgan bo'lsa, aks holda tashqi browser)",
+                                                  textAlign: TextAlign.center,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 3,
+                                                  style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontFamily: 'Medium',
+                                                      color: Theme.of(context)
+                                                          .textTheme
+                                                          .bodyMedium
+                                                          ?.color),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ]),
+                        ),
                       ],
                     )),
               ));
     } else {
-      CustomToast.showToast("To'lov imkonsiz, minimal summa 500 so'mdan yuqori!");
+      CustomToast.showToast(
+          "To'lov imkonsiz, minimal summa 500 so'mdan yuqori!");
     }
   }
 }

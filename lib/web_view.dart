@@ -30,17 +30,16 @@ class _WebViewPageState extends State<WebViewPage> {
   int? userId;
 
   InAppWebViewController? webViewController;
-  InAppWebViewGroupOptions? options = InAppWebViewGroupOptions(
-      crossPlatform: InAppWebViewOptions(
+  InAppWebViewSettings options = InAppWebViewSettings(
     useShouldOverrideUrlLoading: true,
-    mediaPlaybackRequiresUserGesture: false,
-  ));
+    mediaPlaybackRequiresUserGesture: false);
 
   PullToRefreshController? pullToRefreshController;
   String url = "";
   URLRequest urlRequest = URLRequest();
   double progress = 0;
   final urlController = TextEditingController();
+
 
   @override
   void initState() {
@@ -88,8 +87,25 @@ class _WebViewPageState extends State<WebViewPage> {
           );
   }
 
+  Future<NavigationActionPolicy?> checkDeepLink(
+      InAppWebViewController inAppWebViewController,
+      NavigationAction navigationAction) async {
+    final url = await inAppWebViewController.getUrl();
+    final deepLink = navigationAction.request.url;
+
+    if (deepLink != null &&
+        url != navigationAction.request.url &&
+        (deepLink.scheme != 'https' && deepLink.scheme != 'http')) {
+      launchUrl(deepLink, mode: LaunchMode.externalNonBrowserApplication);
+      return NavigationActionPolicy.CANCEL;
+    }
+
+    return NavigationActionPolicy.ALLOW;
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -128,7 +144,7 @@ class _WebViewPageState extends State<WebViewPage> {
                 InAppWebView(
                   key: webViewKey,
                   initialUrlRequest: urlRequest,
-                  initialOptions: options,
+                  initialSettings: options,
                   pullToRefreshController: pullToRefreshController,
                   onWebViewCreated: (controller) {
                     webViewController = controller;
@@ -144,6 +160,7 @@ class _WebViewPageState extends State<WebViewPage> {
                         resources: request,
                         action: PermissionRequestResponseAction.GRANT);
                   },
+
                   shouldOverrideUrlLoading:
                       (controller, navigationAction) async {
                     var uri = navigationAction.request.url!;

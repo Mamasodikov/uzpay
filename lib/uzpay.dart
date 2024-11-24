@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:uzpay/constants.dart';
 import 'package:uzpay/enums.dart';
 import 'package:uzpay/objects.dart';
@@ -18,70 +19,105 @@ import 'web_view.dart';
 class UzPay {
   static doPayment(BuildContext context,
       {required double amount,
-        required PaymentSystem paymentSystem,
-        required Params paymentParams,
-        required BrowserType browserType,
-        ChromeSafariBrowserMenuItem? externalBrowserMenuItem}) async {
+      required PaymentSystem paymentSystem,
+      required Params paymentParams,
+      required BrowserType browserType,
+      ChromeSafariBrowserMenuItem? externalBrowserMenuItem}) async {
     final ChromeSafariBrowser browser = ChromeSafariBrowser();
     if (externalBrowserMenuItem != null) {
       browser.addMenuItem(externalBrowserMenuItem);
     }
 
-    if (browserType == BrowserType.Internal) {
-      Navigator.push(
-        context,
-        CupertinoPageRoute(
-            builder: (context) =>
-                WebViewPage(
-                  amount: amount,
-                  paymentSystem: paymentSystem,
-                  paymentParams: paymentParams,
-                )),
-      );
-    } else {
+    WebUri? urlRequest;
+
+    if (PaymentSystem.Click == paymentSystem) {
+      urlRequest = WebUri.uri(Uri.https(clickPaymentPath, "/services/pay", {
+        'service_id': paymentParams.clickParams?.serviceId,
+        'merchant_id': paymentParams.clickParams?.merchantId,
+        'amount': amount.toString(),
+        'transaction_param': paymentParams.clickParams?.transactionParam,
+        'merchant_user_id': paymentParams.clickParams?.merchantUserId
+      }));
+    } else if (PaymentSystem.Payme == paymentSystem ||
+        PaymentSystem.PaymeTest == paymentSystem) {
+      String text =
+          "m=${paymentParams.paymeParams?.merchantId};ac.${paymentParams.paymeParams?.accountObject}=${paymentParams.paymeParams?.transactionParam};a=${amount * 100}";
+      Codec<String, String> stringToBase64 = utf8.fuse(base64);
+      String encoded = stringToBase64.encode(text);
+
+      urlRequest = WebUri.uri(Uri.https(
+          PaymentSystem.PaymeTest == paymentSystem
+              ? paymePaymentTestPath
+              : paymePaymentPath,
+          encoded));
+    }
+
+    if (browserType == BrowserType.Internal ||
+        browserType == BrowserType.InternalOrDeeplink) {
+
+      if (browserType != BrowserType.InternalOrDeeplink) {
+        Navigator.push(
+          context,
+          CupertinoPageRoute(
+              builder: (context) => WebViewPage(
+                    amount: amount,
+                    paymentSystem: paymentSystem,
+                    paymentParams: paymentParams,
+                  )),
+        );
+      } else {
+        if (await canLaunchUrl(Uri.parse(urlRequest.toString()))) {
+          // Launch the App
+          await launchUrl(Uri.parse(urlRequest.toString()),
+              mode: LaunchMode.externalNonBrowserApplication);
+        } else {
+          Navigator.push(
+            context,
+            CupertinoPageRoute(
+                builder: (context) => WebViewPage(
+                      amount: amount,
+                      paymentSystem: paymentSystem,
+                      paymentParams: paymentParams,
+                    )),
+          );
+        }
+      }
+    } else if (browserType == BrowserType.External ||
+        browserType == BrowserType.ExternalOrDeepLink) {
       if (paymentSystem == PaymentSystem.Click
           ? (paymentParams.clickParams?.serviceId != null ||
-          paymentParams.clickParams?.merchantId != null ||
-          paymentParams.clickParams?.transactionParam != null ||
-          paymentParams.clickParams?.merchantUserId != null)
+              paymentParams.clickParams?.merchantId != null ||
+              paymentParams.clickParams?.transactionParam != null ||
+              paymentParams.clickParams?.merchantUserId != null)
           : (paymentParams.paymeParams?.merchantId != null ||
-          paymentParams.paymeParams?.transactionParam != null)) {
+              paymentParams.paymeParams?.transactionParam != null)) {
         if (Platform.isAndroid) {
           await InAppWebViewController.setWebContentsDebuggingEnabled(false);
         }
 
-        WebUri? urlRequest;
-
-        if (PaymentSystem.Click == paymentSystem) {
-          urlRequest = WebUri.uri(Uri.https(clickPaymentPath, "/services/pay", {
-            'service_id': paymentParams.clickParams?.serviceId,
-            'merchant_id': paymentParams.clickParams?.merchantId,
-            'amount': amount.toString(),
-            'transaction_param': paymentParams.clickParams?.transactionParam,
-            'merchant_user_id': paymentParams.clickParams?.merchantUserId
-          }));
-        } else if (PaymentSystem.Payme == paymentSystem ||
-            PaymentSystem.PaymeTest == paymentSystem) {
-          String text =
-              "m=${paymentParams.paymeParams?.merchantId};ac.${paymentParams
-              .paymeParams?.accountObject}=${paymentParams.paymeParams
-              ?.transactionParam};a=${amount * 100}";
-          Codec<String, String> stringToBase64 = utf8.fuse(base64);
-          String encoded = stringToBase64.encode(text);
-
-          urlRequest = WebUri.uri(Uri.https(PaymentSystem.PaymeTest == paymentSystem
-              ? paymePaymentTestPath
-              : paymePaymentPath, encoded));
-        }
-
         ///Other payments are coming soon...
 
+        if (browserType != BrowserType.ExternalOrDeepLink) {
           browser.open(
               url: urlRequest,
               options: ChromeSafariBrowserClassOptions(
                   android: AndroidChromeCustomTabsOptions(
                       shareState: CustomTabsShareState.SHARE_STATE_OFF),
                   ios: IOSSafariOptions(barCollapsingEnabled: true)));
+        } else {
+          if (await canLaunchUrl(Uri.parse(urlRequest.toString()))) {
+            // Launch the App
+            await launchUrl(Uri.parse(urlRequest.toString()),
+                mode: LaunchMode.externalNonBrowserApplication);
+          } else {
+            browser.open(
+                url: urlRequest,
+                options: ChromeSafariBrowserClassOptions(
+                    android: AndroidChromeCustomTabsOptions(
+                        shareState: CustomTabsShareState.SHARE_STATE_OFF),
+                    ios: IOSSafariOptions(barCollapsingEnabled: true)));
+          }
+        }
       } else {
         throw Exception('Invalid params');
       }
