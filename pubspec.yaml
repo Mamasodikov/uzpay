@@ -1,6 +1,6 @@
 name: uzpay
 description: Uzbek Payment Systems Integration for Flutter apps
-version: 0.0.1+1
+version: 0.0.2+2
 homepage: https://github.com/Mamasodikov/uzpay
 
 environment:
@@ -14,9 +14,9 @@ dependencies:
   # For web view
   flutter_inappwebview: ^6.1.5
   # Opening URL/DIAL/MAILS/FILES
-  url_launcher: ^6.1.5
+  url_launcher: ^6.3.1
   # For simple toasts
-  fluttertoast: ^8.2.5
+  fluttertoast: ^8.2.10
 
 screenshots:
   - description: 'Banner for showcasing'
@@ -29,7 +29,7 @@ screenshots:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^5.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

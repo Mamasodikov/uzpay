@@ -87,6 +87,7 @@ class _WebViewPageState extends State<WebViewPage> {
           );
   }
 
+  ///Not used
   Future<NavigationActionPolicy?> checkDeepLink(
       InAppWebViewController inAppWebViewController,
       NavigationAction navigationAction) async {

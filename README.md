@@ -83,6 +83,8 @@ var paymentParams = Params(
         paymentSystem: PaymentSystem.Payme,
         paymentParams: paymentParams,
         browserType: BrowserType.External,
+        
+        ///browserType: BrowserType.ExternalOrDeepLink (For deeplink)
 
         // Quyida ixtiyoriy parametr
         externalBrowserMenuItem: ChromeSafariBrowserMenuItem(
@@ -96,7 +98,7 @@ var paymentParams = Params(
 
 ```dart
 enum PaymentSystem { Click, Payme, PaymeTest }
-enum BrowserType { External, Internal }
+enum BrowserType { External, Internal, ExternalOrDeepLink, InternalOrDeeplink }
 ```
 
 ***Eslatma: Agar to'lov summasi Payme kabi tiyinlar bilan kiritilsa, jarayon hisobga olingan, faqat aktual summani kiritasiz, masalan 5000 so'm => amount: 5000***
