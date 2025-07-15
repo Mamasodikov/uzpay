@@ -11,6 +11,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'dialog_skeleton.dart';
 import 'dotted_border.dart';
 import 'functions.dart';
+import 'qr_example_page.dart';
 
 void main() {
   runApp(MaterialApp(home: const MyApp()));
@@ -39,7 +40,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Uzbek Payment Systems 🇺🇿💳'),
+        title: const Text('Uzbek Payment Systems 🇺🇿💳', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.indigo,
       ),
       body: Padding(
@@ -80,6 +81,33 @@ class _MyAppState extends State<MyApp> {
                     ?.copyWith(fontSize: 20)),
             const SizedBox(
               height: 10,
+            ),
+            // QR Code & Link Generation Button
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.only(bottom: 15),
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const QRExamplePage(),
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.qr_code, color: Colors.white),
+                label: const Text(
+                  'QR Code & Link Generation Demo',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.purple,
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+              ),
             ),
             Row(
               children: [
@@ -503,7 +531,8 @@ class _MyAppState extends State<MyApp> {
                                             amount: amount,
                                             paymentSystem: paymentSystem,
                                             paymentParams: paymentParams,
-                                            browserType: BrowserType.ExternalOrDeepLink,
+                                            browserType:
+                                                BrowserType.ExternalOrDeepLink,
 
                                             //This field is optional
                                             externalBrowserMenuItem:
