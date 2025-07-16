@@ -18,6 +18,11 @@
 * **✨ ENHANCEMENT**: Logo background is optional - no background if not specified
 * **🔧 FIX**: Updated deprecated browser settings API to use new `ChromeSafariBrowserSettings`
 
+## 0.0.3+2
+
+* **🔧 FIX**: Increased QR code resolution from 400x400 to 600x600 pixels for better scanning reliability
+* **✨ ENHANCEMENT**: Improved QR code clarity and readability with higher resolution output
+
 ## 0.0.3+1
 
 * **🆕 NEW FEATURE**: Added `logoBackgroundRadius` parameter for rounded corners on logo backgrounds
