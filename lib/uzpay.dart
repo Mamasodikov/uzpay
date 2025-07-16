@@ -72,7 +72,7 @@ class UzPay {
     // Create a picture recorder to capture the painting
     final recorder = ui.PictureRecorder();
     final canvas = Canvas(recorder);
-    const size = Size(400, 400);
+    const size = Size(600, 600);
 
     // Paint the QR code
     qrPainter.paint(canvas, size);
